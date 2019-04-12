@@ -1,8 +1,10 @@
 import React from 'react';
 
+import Layout from './containers/Layout';
+
 const App = ( ) => {
     return(
-        <h1>React Project</h1>
+        <Layout />
     )
 };
 
