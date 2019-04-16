@@ -40,14 +40,29 @@ a {
 button {
     font-family: inherit;
     font-size: inherit;
+    color: inherit;
     cursor: pointer;
 } 
 
 input, select, textarea {
     font-family: inherit;
     font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    padding: 5px 15px; 
+}
+
+input {
+    border: none;
+    border-bottom: thin solid #666;
+
+    &:hover,
+    &:focus {
+        border-bottom: thin solid #a88645;
+    }
 }
 
 img {
     width: 100%;
 }
+

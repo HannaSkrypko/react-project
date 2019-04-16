@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Header from '../Header';
+import * as actions from '../../store/action/allActions';
 
-export default  class Layout extends Component {
+class Layout extends Component {
+
+    componentDidMount(){
+        this.props.onInitUsers();
+    }
+
     render() {
         return (
             <div>
@@ -11,3 +18,17 @@ export default  class Layout extends Component {
         )
     }
 };
+
+const mapStateToProps = state => {
+    return {
+        users: state.user.users,
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onInitUsers: () => dispatch(actions.initUsers()),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
