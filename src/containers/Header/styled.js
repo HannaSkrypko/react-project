@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import * as colors from '../../constats/colors';
+import * as colors from '../../constants/colors';
 
 export const HeaderNav = styled.nav`
     position: relative;
@@ -16,7 +16,7 @@ export const HeaderNav = styled.nav`
 export const HeaderDecoration = styled.div`
     position: absolute;
     width: 26%;
-    padding-left: 12%;
+    padding-left: 10%;
 
     font-size: 1.5em;
     font-weight: 500;
@@ -51,6 +51,10 @@ export const HeaderNavitem = styled.li`
     line-height: 50px;
     padding: 0 10px;
     cursor: pointer;
+
+    & i {
+        font-size: 1.3em;
+    }
 
     &:last-child::before {
         content: "/";
