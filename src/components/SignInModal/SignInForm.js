@@ -59,10 +59,12 @@ class SignInForm extends Component {
                     }}
                     validationSchema={SingInSchema}
                     onSubmit={values => {
-                        if (this.props.users.findIndex(x => x.email === values.email) !== -1 && this.props.users.findIndex(x => passwordHash.verify(values.password, x.password) === true) !== -1){
+                        if ((this.props.users.findIndex(x => x.email === values.email) !== -1 && this.props.users.findIndex(x => passwordHash.verify(values.password, x.password) === true) !== -1)){
+                            const index = this.props.users.findIndex(x => x.email === values.email);
                             const userData = {
-                                email: values.email, 
-                                username: values.username,
+                                email: this.props.users[index].email, 
+                                username: this.props.users[index].username,
+                                password: this.props.users[index].password,
                             }
                             this.props.onSetCurrentUser(userData);
                             this.props.close();

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Icon } from 'antd';
 
@@ -11,7 +11,7 @@ import SignUpModal from '../../components/SignUpModal';
 import SignInModal from '../../components/SignInModal';
 import * as actions from '../../store/action/allActions';
 
-class Header extends Component {
+class Header extends PureComponent {
     state = {
         modals: {
             signup: false,
