@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Icon } from 'antd';
 
@@ -9,6 +10,7 @@ import {
 
 import SignUpModal from '../../components/SignUpModal';
 import SignInModal from '../../components/SignInModal';
+import Cart from '../Cart';
 import * as actions from '../../store/action/allActions';
 
 class Header extends PureComponent {
@@ -16,7 +18,8 @@ class Header extends PureComponent {
         modals: {
             signup: false,
             signin: false,
-        },            
+        }, 
+        isCartOpen: false,           
     }
 
     modalsActions = {
@@ -37,6 +40,12 @@ class Header extends PureComponent {
                 }) : null;
         }
     }
+
+    toggleCartHandler = () => {
+        this.setState(state => ({
+            isCartOpen: !state.isCartOpen
+        }));
+    }
     
     render() {
         return(
@@ -52,12 +61,15 @@ class Header extends PureComponent {
                     )
                     : (
                     <HeaderNavList>
-                        <HeaderNavitem><Icon type="shopping-cart" title="Shopping cart"/> </HeaderNavitem>
-                        <HeaderNavitem><Icon type="export" title="Exit" onClick={() => this.props.onSetCurrentUser(null)}/> </HeaderNavitem>
+                        <HeaderNavitem><NavLink to='/profile'><Icon type="user" title="Profile "/></NavLink></HeaderNavitem>
+                        <HeaderNavitem><Icon type="shopping-cart" title="Shopping cart" onClick={this.toggleCartHandler}/> </HeaderNavitem>
+                        <HeaderNavitem className="exitItem"><Icon type="export" title="Exit" onClick={() => this.props.onSetCurrentUser(null)}/> </HeaderNavitem>
                     </HeaderNavList>
                     )
                 }
             </HeaderNav>
+
+            {this.state.isCartOpen ? <Cart /> : null}
             
             {this.state.modals.signup ? <SignUpModal close={() => this.modalsActions.closeModal("signup")}/> : null}
             {this.state.modals.signin ? <SignInModal close={() => this.modalsActions.closeModal("signin")}/> : null}

@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 
 import App from './App';
 import './main.scss';
+import './assets/product.png';
 
 import enterReducer from './store/reducer/enterReducer';
 import catalogReducer from './store/reducer/catalogReducer';

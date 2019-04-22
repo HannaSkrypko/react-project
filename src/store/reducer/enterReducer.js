@@ -1,7 +1,11 @@
 import * as actionType from '../action/actionTypes';
 
 const initialState = {
-    currentUser: null,
+    currentUser: {
+        email: "ann201096@mail.ru",
+        password: "sha1$e062ac08$1$ac5c9f5cdcc8e8d790c07305e634715...",
+        username: "anytaskr",
+    },
     users: [],
 }
 

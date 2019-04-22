@@ -5,7 +5,7 @@ import * as colors from '../../constants/colors';
 export const HeaderNav = styled.nav`
     position: relative;
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
     padding-top: 15px;
 
     display: flex;
@@ -56,11 +56,27 @@ export const HeaderNavitem = styled.li`
         font-size: 1.3em;
     }
 
+    & a {
+        color: ${colors.DEFAULT_BLACK};
+        
+        &:hover {
+            color: ${colors.GOLD};
+        }
+    }
+
+    & a.active {
+        color: ${colors.GOLD};
+    }
+
     &:last-child::before {
         content: "/";
         position: absolute;
         top: 0px;
         left: -2px;
+    }
+
+    &.exitItem:last-child::before {
+        display: none;
     }
 
     &:hover {

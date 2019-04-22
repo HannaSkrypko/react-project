@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from '../Header';
+import Profile from '../Profile';
+import Catalog from '../Catalog';
 import * as actions from '../../store/action/allActions';
 
 class Layout extends Component {
@@ -14,6 +17,11 @@ class Layout extends Component {
         return (
             <div>
                 <Header />
+
+                <main>
+                    <Route path="/" exact component={Catalog} />
+                    <Route path="/profile" component={Profile} />
+                </main>
             </div>
         )
     }
@@ -31,4 +39,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));
