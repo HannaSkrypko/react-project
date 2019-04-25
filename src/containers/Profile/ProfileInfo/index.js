@@ -1,3 +1,3 @@
-import ProfileInfo from './ProfileInfo';
+import ProfileInfo from './ProfileInfo.jsx';
 
 export default ProfileInfo;

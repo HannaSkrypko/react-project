@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import App from './App';
 import './main.scss';
 import './assets/product.png';
 
-import enterReducer from './store/reducer/enterReducer';
-import catalogReducer from './store/reducer/catalogReducer';
+import rootReducer from './store/reducer';
 
 const logger = store => {
     return next => {
@@ -20,10 +19,6 @@ const logger = store => {
     }
 };
 
-const rootReducer = combineReducers({
-    user: enterReducer,
-    catalog: catalogReducer,
-});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

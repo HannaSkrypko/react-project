@@ -7,4 +7,6 @@ export {
 export {
     addToCart,
     removeFromCart,
+    incrementCartItem,
+    decrementCartItem,
 } from './catalogAction';

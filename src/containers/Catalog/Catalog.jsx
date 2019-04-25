@@ -17,8 +17,12 @@ const CatalogWrapper = styled.div`
 
 class Catalog extends PureComponent {
 
-    addToCartHandler = ( product ) => {
-        this.props.onAddToCart(product);
+    addToCartHandler = ( product, productId ) => {
+        if (this.props.cart.findIndex(item => item.id === productId) !== -1) {
+            this.props.onIncrementCartItem(productId);
+        } else {
+            this.props.onAddToCart(product);
+        }
     } 
 
     render() {
@@ -29,11 +33,11 @@ class Catalog extends PureComponent {
                 {products.map((product, index) => {
                     return (
                         <ProductItem 
-                            key={index} 
+                            key={product.id} 
                             img={product.img}
                             name={product.name}
                             price={product.price}
-                            addToCart={() => this.addToCartHandler(product)}
+                            addToCart={() => this.addToCartHandler(product, product.id)}
                         />
                     )
                 })}
@@ -42,16 +46,17 @@ class Catalog extends PureComponent {
     }
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         cart: state.catalog.cart,
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        cart: state.catalog.cart,
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return {
         onAddToCart: (product) => dispatch(actions.addToCart(product)),
+        onIncrementCartItem: (productId) => dispatch(actions.incrementCartItem(productId)),
     }
 }
 
-export default connect(null, mapDispatchToProps)(Catalog);
+export default connect(mapStateToProps, mapDispatchToProps)(Catalog);

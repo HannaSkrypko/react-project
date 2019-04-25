@@ -46,6 +46,15 @@ class Header extends PureComponent {
             isCartOpen: !state.isCartOpen
         }));
     }
+
+    signOutHandler = () => {
+        if (this.state.isCartOpen == true) {
+            this.setState(state => ({
+                isCartOpen: false
+            }));
+        }
+        this.props.onSetCurrentUser(null);
+    }
     
     render() {
         return(
@@ -63,16 +72,16 @@ class Header extends PureComponent {
                     <HeaderNavList>
                         <HeaderNavitem><NavLink to='/profile'><Icon type="user" title="Profile "/></NavLink></HeaderNavitem>
                         <HeaderNavitem><Icon type="shopping-cart" title="Shopping cart" onClick={this.toggleCartHandler}/> </HeaderNavitem>
-                        <HeaderNavitem className="exitItem"><Icon type="export" title="Exit" onClick={() => this.props.onSetCurrentUser(null)}/> </HeaderNavitem>
+                        <HeaderNavitem className="exitItem"><NavLink to='/' exact onClick={this.signOutHandler}><Icon type="export" title="Exit" /> </NavLink> </HeaderNavitem>
                     </HeaderNavList>
                     )
                 }
             </HeaderNav>
 
-            {this.state.isCartOpen ? <Cart /> : null}
+            {this.state.isCartOpen ? <Cart toggleCart={this.toggleCartHandler} isCartOpen={this.state.isCartOpen}/> : null}
             
-            {this.state.modals.signup ? <SignUpModal close={() => this.modalsActions.closeModal("signup")}/> : null}
-            {this.state.modals.signin ? <SignInModal close={() => this.modalsActions.closeModal("signin")}/> : null}
+            {this.state.modals.signup ? <SignUpModal close={() => this.modalsActions.closeModal("signup")} /> : null}
+            {this.state.modals.signin ? <SignInModal close={() => this.modalsActions.closeModal("signin")} /> : null}
             </div>
         )
     }
