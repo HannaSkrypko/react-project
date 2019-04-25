@@ -39,14 +39,18 @@ export const ProfileInfoHeader = styled.div`
 export const ProfileInfoWrapper = styled.div`
     display: flex;
     align-items: center;
+    
+    width: 85%;
+    margin: 0 auto;
 `;
 
 export const ProfileInfoImage= styled.div`
-    width: 20%;
+    width: 30%;
     margin-right: 100px;
 `;
 
 export const ProfileInformation = styled.div`
+    width: 60%;
 `;
 
 export const ProfileInfoLine = styled.div`
@@ -56,6 +60,12 @@ export const ProfileInfoLine = styled.div`
     align-items: center;
 
     margin-bottom: 10px;
+
+    & p.error {
+        width: 100%;
+        color: ${colors.DANGER};
+        text-align: right;
+    }
 `;
 
 export const ProfileInfoLabel = styled.p`
@@ -75,15 +85,23 @@ export const ProfileInfoLinePassword = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
-    margin: 30px 0;
+    margin: 30px 0 10px;
 
     & input {
         width: 100%;
     }
+
+    & p.error {
+        width: 100%;
+        color: ${colors.DANGER};
+        text-align: right;
+    }
 `;
 
-export const ProfileInfoError = styled.p`
-    display: inline-block;
-    margin-left: 20px;
-    color: ${colors.DANGER};
+export const ProfileInfoError = styled.div`
+    padding: 10px;
+    text-align: center;
+    color: #cc0000;
+    transition: all ease .3s;
+    margin-bottom: 22px;
 `;

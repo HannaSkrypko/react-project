@@ -97,6 +97,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onSetCurrentUser: (currentUser) => dispatch(actions.setCurrentUser(currentUser)),
+        onSetCurrentUser: (currentUser) => dispatch(actions.setCurrentUser(currentUser)),
     }
 };
 

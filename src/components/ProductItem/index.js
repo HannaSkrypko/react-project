@@ -1,3 +1,3 @@
-import ProductItem from './ProductItem';
+import ProductItem from './ProductItem.jsx';
 
 export default ProductItem;

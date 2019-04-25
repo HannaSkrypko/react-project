@@ -81,6 +81,7 @@ class SignUpForm extends Component {
                                 email: values.email, 
                                 username: values.username, 
                                 password: passwordHash.generate(values.password),
+                                orders: [],
                             }
                             this.props.onSignUpUser(userData);
                             this.props.close();

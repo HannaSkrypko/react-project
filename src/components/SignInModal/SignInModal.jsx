@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Modal } from '../../UI';
-import SignInForm from './SignInForm';
+import SignInForm from './SignInForm.jsx';
 
 const SignInModal = ( props ) => {
     return(

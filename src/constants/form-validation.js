@@ -17,7 +17,7 @@ export const SingUpSchema = Yup.object().shape({
     .max(20, "Username shouls be shorter")
     .required("Required"),
   password: Yup.string()
-    .min(8, "Must be longer than 8 characters")
+    .min(3, "Must be longer than 3 characters")
     .required("Required"),
   confirm_password: Yup.string()
     .equalTo(Yup.ref('password'), 'Passwords must match')
@@ -29,6 +29,20 @@ export const SingInSchema = Yup.object().shape({
     .email("Invalid email address")
     .required("Required"),
   password: Yup.string()
-    .min(8, "Must be longer than 8 characters")
+    .min(3, "Must be longer than 3 characters")
     .required("Required"),
+});
+
+export const EditProfileSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email Required"),
+  username: Yup.string()
+    .min(2, "Username should be longer")
+    .max(20, "Username shouls be shorter")
+    .required("Username Required"),
+  old_password: Yup.string()
+    .min(3, "Password must be longer than 3 characters"),
+  new_password: Yup.string()
+    .min(3, "Password must be longer than 3 characters"),
 });
