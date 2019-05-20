@@ -16,6 +16,61 @@ class ProfileInfoForm extends Component {
         errorMsg: "",
     }
 
+    onSubmitFormHandler = ( values ) => {
+        this.setState({
+            errorMsg: "",
+        });
+        let userInfo = {
+            email: this.props.currentUser.email,
+            username: this.props.currentUser.username,
+            password: this.props.currentUser.password,
+            orders: this.props.currentUser.orders,
+        }
+        if (values.email === userInfo.email && values.username === userInfo.username && !values.old_password && !values.new_password) {
+            this.setState({
+                errorMsg: "Nothing has been changed.",
+            });
+        }  
+        
+        if (!values.old_password && values.new_password) {
+            this.setState({
+                errorMsg: "Enter old password to change it to new.",
+            });
+        } else if (values.new_password !== "" && values.new_password === values.old_password) {
+            this.setState({
+                isError: true,
+                errorMsg: "New password must be different from old.",
+            });
+        } else if (values.new_password !== "" && passwordHash.verify(values.old_password, this.props.currentUser.password) !== true) {
+            this.setState({
+                errorMsg: "Please check old password.",
+            });
+        } else if (values.new_password !== "" && values.new_password !== values.old_password) {
+            userInfo.password = passwordHash.generate(values.new_password);
+        } 
+        
+        if (values.email !== userInfo.email && this.props.users.findIndex(x => x.email === values.email) !== -1) {
+            this.setState({
+                errorMsg: "Email already in use. Please choose another one.",
+            });
+        } else if (values.email !== userInfo.email && this.props.users.findIndex(x => x.email === values.email) === -1) {
+            userInfo.email = values.email;
+        }  
+        
+        if (values.username !== userInfo.username && this.props.users.findIndex(x => x.username === values.username) !== -1) {
+            this.setState({
+                errorMsg: "Username already in use. Please choose another one.",
+            });
+        } else if (values.username !== userInfo.username && this.props.users.findIndex(x => x.username === values.username) === -1) {
+            userInfo.username = values.username;
+        }
+
+        if (this.state.errorMsg === "") {
+            this.props.onSetCurrentUser(userInfo);
+            this.props.toggleEditMode();
+        }
+    }
+
     render() {
         return(
             <Formik
@@ -27,58 +82,7 @@ class ProfileInfoForm extends Component {
                 }}
                 validationSchema={EditProfileSchema}
                 onSubmit={values => {
-                    this.setState({
-                        errorMsg: "",
-                    });
-                    let userInfo = {
-                        email: this.props.currentUser.email,
-                        username: this.props.currentUser.username,
-                        password: this.props.currentUser.password,
-                        orders: this.props.currentUser.orders,
-                    }
-                    if (values.email === userInfo.email && values.username === userInfo.username && !values.old_password && !values.new_password) {
-                        this.setState({
-                            errorMsg: "Nothing has been changed.",
-                        });
-                    }  
-                    
-                    if (!values.old_password && values.new_password) {
-                        this.setState({
-                            errorMsg: "Enter old password to change it to new.",
-                        });
-                    } else if (values.new_password !== "" && values.new_password === values.old_password) {
-                        this.setState({
-                            isError: true,
-                            errorMsg: "New password must be different from old.",
-                        });
-                    } else if (values.new_password !== "" && passwordHash.verify(values.old_password, this.props.currentUser.password) !== true) {
-                        this.setState({
-                            errorMsg: "Please check old password.",
-                        });
-                    } else if (values.new_password !== "" && values.new_password !== values.old_password) {
-                        userInfo.password = passwordHash.generate(values.new_password);
-                    } 
-                    
-                    if (values.email !== userInfo.email && this.props.users.findIndex(x => x.email === values.email) !== -1) {
-                        this.setState({
-                            errorMsg: "Email already in use. Please choose another one.",
-                        });
-                    } else if (values.email !== userInfo.email && this.props.users.findIndex(x => x.email === values.email) === -1) {
-                        userInfo.email = values.email;
-                    }  
-                    
-                    if (values.username !== userInfo.username && this.props.users.findIndex(x => x.username === values.username) !== -1) {
-                        this.setState({
-                            errorMsg: "Username already in use. Please choose another one.",
-                        });
-                    } else if (values.username !== userInfo.username && this.props.users.findIndex(x => x.username === values.username) === -1) {
-                        userInfo.username = values.username;
-                    }
-
-                    if (this.state.errorMsg === "") {
-                        this.props.onSetCurrentUser(userInfo);
-                        this.props.toggleEditMode();
-                    }
+                   this.onSubmitFormHandler(values);
                 }}
                 render={() => (
                     <Form className="form-wrapper">

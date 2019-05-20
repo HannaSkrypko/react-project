@@ -4,7 +4,7 @@ const initialState = {
     currentUser: {
         email: "test@test.com",
         username: "test",
-        password: "sha1$11c2c481$1$aff9c479168c203660f9d6923552ccb480ab1575",
+        password: "sha1$3117eb56$1$fffe87039b60933d1dd7816b604dce239782a9bf",
         orders: [],
     },
     users: [],
